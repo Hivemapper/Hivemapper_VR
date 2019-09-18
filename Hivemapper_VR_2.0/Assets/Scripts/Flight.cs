@@ -15,6 +15,8 @@ namespace Valve.VR.InteractionSystem
         public GameObject flightController;
 
         private float flightSpeed;
+        private bool rotationEnabled;
+        private float rotationSpeed;
 
         private Player player = null;
 
@@ -69,13 +71,19 @@ namespace Valve.VR.InteractionSystem
             //player.transform.position += Vector3.up * axis[1] * Time.deltaTime * flightSpeed;
 
 
-            Debug.Log("Source: " + fromSource);
+            //Debug.Log("Source: " + fromSource);
 
             Vector3 direction = this.transform.forward;
 
             player.transform.position += direction * axis[1] * Time.deltaTime * flightSpeed;
 
-            Debug.Log("Player position: " + player.transform.position);
+            if (rotationEnabled)
+            {
+                player.transform.Rotate(0, Time.deltaTime * rotationSpeed * axis[0], 0);
+            }
+
+            //Debug.Log("Player position: " + player.transform.position);
+            //Debug.Log("Axis[0]: " + axis[0]);
         }
 
 
@@ -83,6 +91,13 @@ namespace Valve.VR.InteractionSystem
         {
             //Set flight speed according to Flight Control.
             flightSpeed = flightController.GetComponent<FlightControl>().flightSpeed;
+
+            //Set rotation information according to Flight Control.
+            rotationEnabled = flightController.GetComponent<FlightControl>().rotationEnabled;
+            rotationSpeed = flightController.GetComponent<FlightControl>().rotateSpeed;
+
+
+
         }
 
 

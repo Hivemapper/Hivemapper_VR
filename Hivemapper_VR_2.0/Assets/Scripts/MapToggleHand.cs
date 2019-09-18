@@ -8,6 +8,7 @@ namespace Valve.VR.InteractionSystem
         //Intended to be attached to hands; activates Map Loader script to load next map.
 
         public SteamVR_Action_Boolean mapToggleAction;
+        public SteamVR_Action_Boolean changeDetectionToggleAction;
 
         public Hand hand;
 
@@ -33,13 +34,14 @@ namespace Valve.VR.InteractionSystem
             if (hand == null)
                 hand = this.GetComponent<Hand>();
 
-            if (mapToggleAction == null)
+            if (mapToggleAction == null || changeDetectionToggleAction == null)
             {
-                Debug.LogError("<b>[SteamVR Interaction]</b> No map toggle action assigned");
+                Debug.LogError("<b>[SteamVR Interaction]</b> No map toggle or change detection toggle action assigned");
                 return;
             }
 
             mapToggleAction.AddOnChangeListener(OnMapToggleAction, hand.handType);
+            changeDetectionToggleAction.AddOnChangeListener(OnChangeDetectionToggleAction, hand.handType);
         }
 
 
@@ -47,6 +49,9 @@ namespace Valve.VR.InteractionSystem
         {
             if (mapToggleAction != null)
                 mapToggleAction.RemoveOnChangeListener(OnMapToggleAction, hand.handType);
+
+            if (changeDetectionToggleAction != null)
+                changeDetectionToggleAction.RemoveOnChangeListener(OnChangeDetectionToggleAction, hand.handType);
         }
 
 
@@ -56,6 +61,15 @@ namespace Valve.VR.InteractionSystem
             {
                 MapLoader mapLoaderScript = mapLoader.GetComponent<MapLoader>();
                 mapLoaderScript.ChangeMap();
+            }
+        }
+
+        private void OnChangeDetectionToggleAction(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSource, bool newValue)
+        {
+            if (newValue)
+            {
+                MapLoader mapLoaderScript = mapLoader.GetComponent<MapLoader>();
+                mapLoaderScript.ToggleChangeDetection();
             }
         }
 

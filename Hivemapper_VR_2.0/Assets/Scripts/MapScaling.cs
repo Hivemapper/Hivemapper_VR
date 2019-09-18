@@ -12,6 +12,7 @@ public class MapScaling : MonoBehaviour
     private float controllerDistance;
     private float controllerDistanceReference;
     private Vector3 mapScaleReference;
+    private Vector3 mapCenterReference;
     private bool bothGrippedOld = false;
     private bool bothGrippedNew = false;
     private bool manipulationMode = false;
@@ -38,10 +39,12 @@ public class MapScaling : MonoBehaviour
             bothGrippedNew = false;
 
         //If both gripped status has changed to true, store controller distance and turn manipulation mode on
+        //Also store current map information for reference
         if (bothGrippedNew && !bothGrippedOld)
         {
             controllerDistanceReference = controllerDistance;
             mapScaleReference = mapParent.transform.GetChild(0).transform.localScale;
+            mapCenterReference = mapParent.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshFilter>().mesh.bounds.center;
             manipulationMode = true;
             Debug.Log("Map manipulation mode engaged.");
         }
@@ -62,10 +65,16 @@ public class MapScaling : MonoBehaviour
         //Debug.Log("Controller distance reference: " + controllerDistanceReference);
 
 
-        //If manipulation mode is on, change the scale of the map according to the ratio of controller distance vs. stored controller distance
+        //If manipulation mode is on, change the scale of the map (and change detection map if present) according to the ratio of controller distance vs. stored controller distance
         if (manipulationMode)
         {
-            mapParent.transform.GetChild(0).transform.localScale = mapScaleReference * controllerDistance / controllerDistanceReference;
+            foreach (Transform child in mapParent.transform)
+            {
+                child.localScale = mapScaleReference * controllerDistance / controllerDistanceReference;
+
+                
+            }
+
             Debug.Log("Map Scale: " + mapParent.transform.GetChild(0).transform.localScale);
 
         }

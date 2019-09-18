@@ -9,6 +9,12 @@ public class FlightControl : MonoBehaviour
     [Tooltip("Set flight speed.")]
     public float flightSpeed = 1f;
 
+    [Tooltip("Enable rotation.")]
+    public bool rotationEnabled = true;
+
+    [Tooltip("Rotation speed.")]
+    public float rotateSpeed = 50f;
+
     // Start is called before the first frame update
     void Start()
     {
