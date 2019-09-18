@@ -44,7 +44,8 @@ public class MapScaling : MonoBehaviour
         {
             controllerDistanceReference = controllerDistance;
             mapScaleReference = mapParent.transform.GetChild(0).transform.localScale;
-            mapCenterReference = mapParent.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshFilter>().mesh.bounds.center;
+            //mapCenterReference = mapParent.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshFilter>().mesh.bounds.center;
+            //mapCenterReference = mapParent.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Renderer>().bounds.center;
             manipulationMode = true;
             Debug.Log("Map manipulation mode engaged.");
         }
@@ -72,10 +73,28 @@ public class MapScaling : MonoBehaviour
             {
                 child.localScale = mapScaleReference * controllerDistance / controllerDistanceReference;
 
-                
+                //Adjusting the local scale causes the map to move, possibly because it thinks it's part of a larger map.
+                //However, using the bounds can give an accurate depiction of where the center of the map is.
+                //If we can constantly move the map as we scale it so that the center remains the same, it should solve the problem.
+                //We've captured the "reference center" above, so we need to move the map so that the current center is the reference center.
+                //In other words, newC = oldC + movement vector, or movement vector = newC - oldC
+
+                /*
+                Debug.Log("Mesh center: " + child.GetChild(0).gameObject.GetComponent<MeshFilter>().mesh.bounds.center);
+                Debug.Log("Movement vector: " + (child.GetChild(0).gameObject.GetComponent<MeshFilter>().mesh.bounds.center - mapCenterReference));
+                child.localPosition += child.GetChild(0).gameObject.GetComponent<MeshFilter>().mesh.bounds.center - mapCenterReference;
+                */
+
+                //However, the mesh center doesn't change with scale... We should try renderer bounds
+                //Debug.Log("Mesh center: " + child.GetChild(0).gameObject.GetComponent<Renderer>().bounds.center);
+                //Debug.Log("New position: " + (child.GetChild(0).gameObject.GetComponent<Renderer>().bounds.center - mapCenterReference));
+                //child.position = child.GetChild(0).gameObject.GetComponent<Renderer>().bounds.center - mapCenterReference;
+
+                //Ultimately it seems that the pivot point needs to be changed, which is easiest to do on export of the object.
+
             }
 
-            Debug.Log("Map Scale: " + mapParent.transform.GetChild(0).transform.localScale);
+            //Debug.Log("Map Scale: " + mapParent.transform.GetChild(0).transform.localScale);
 
         }
 
