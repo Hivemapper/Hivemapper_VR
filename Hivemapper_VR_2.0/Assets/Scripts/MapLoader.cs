@@ -79,7 +79,7 @@ public class MapLoader : MonoBehaviour
         map.transform.localPosition -= new Vector3(mapBounds.extents.x, Vector3.zero.y, Vector3.zero.z);
         map.transform.position += Vector3.down * startingHeight;
 
-        TextDisplay.transform.localPosition = Player.transform.position - new Vector3(4.0f, 0f, 0);
+        TextDisplay.transform.localPosition = Player.transform.position - new Vector3(2.5f, 0f, 0);
         TextDisplay.transform.LookAt(Player.transform);
         TextDisplay.transform.localPosition += new Vector3(0, 1f, 0);
 
@@ -102,6 +102,7 @@ public class MapLoader : MonoBehaviour
         }
 
         //Adjust text display
+        TextDisplay.transform.Find("Canvas").Find("Current Map").gameObject.GetComponent<Text>().text = "Current map (" + (count + 1) + " of " + Maps.Length + "): ";
         TextDisplay.transform.Find("Canvas").Find("Map Name").gameObject.GetComponent<Text>().text = map.name;
         if (ChangeDetectionAvailable)
             TextDisplay.transform.Find("Canvas").Find("Availability").gameObject.GetComponent<Text>().text = "Yes";

@@ -1,5 +1,7 @@
 {
-   "app_key" : "application.generated.unity.steamvr.exe",
+   "action_manifest_version" : 0,
+   "alias_info" : {},
+   "app_key" : "application.generated.unity.hivemapper_vr_2.0.exe",
    "bindings" : {
       "/actions/buggy" : {
          "sources" : [
@@ -218,6 +220,82 @@
             }
          ]
       },
+      "/actions/hivemapper" : {
+         "sources" : [
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/hivemapper/in/menu"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/a"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/hivemapper/in/menu"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/a"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/hivemapper/in/interact"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/hivemapper/in/interact"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "position" : {
+                     "output" : "/actions/hivemapper/in/fly"
+                  }
+               },
+               "mode" : "joystick",
+               "path" : "/user/hand/left/input/thumbstick"
+            },
+            {
+               "inputs" : {
+                  "position" : {
+                     "output" : "/actions/hivemapper/in/fly"
+                  }
+               },
+               "mode" : "joystick",
+               "path" : "/user/hand/right/input/thumbstick"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/hivemapper/in/grip"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/b"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/hivemapper/in/grip"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/b"
+            }
+         ]
+      },
       "/actions/platformer" : {
          "sources" : [
             {
@@ -259,7 +337,10 @@
          ]
       }
    },
+   "category" : "steamvr_input",
    "controller_type" : "knuckles",
    "description" : "",
-   "name" : "knuckles_default"
+   "name" : "My Hivemapper_VR_2.0 [Testing] configuration for Index Controller",
+   "options" : {},
+   "simulated_actions" : []
 }
