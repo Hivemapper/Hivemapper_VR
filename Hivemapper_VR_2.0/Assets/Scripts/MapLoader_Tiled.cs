@@ -49,50 +49,56 @@ public class MapLoader_Tiled : MonoBehaviour
     {
             //Load all maps from a given folder. 
         Maps = Resources.LoadAll(FolderPath, typeof(GameObject));
-        if (Maps.Length == 0)
-            Debug.LogError("<b>No maps found at that folder path!</b>");
-        
-        //Instantiate a copy of each map tile.
-        foreach (Object map in Maps)
-        {
-            Instantiate(map, MapParent.transform, false);
-        }
+            if (Maps.Length == 0)
+                Debug.LogError("<b>No maps found at that folder path!</b>");
 
-        //Add necessary colliders and calculate the bounds of the full map.
-        foreach (Transform map in MapParent.transform)
-        {
-                map.GetChild(0).gameObject.AddComponent<MeshCollider>();
-                map.GetChild(0).gameObject.AddComponent<TeleportAreaInvisible>();
-                map.GetChild(0).gameObject.GetComponent<TeleportAreaInvisible>().markerActive = false;
+            else
+            {
 
-                //Mesh mapMesh = map.transform.GetChild(0).gameObject.GetComponent<MeshFilter>().mesh;
-                //Bounds mapBounds = mapMesh.bounds;
-                Bounds mapBounds = map.transform.GetChild(0).gameObject.GetComponent<Collider>().bounds;
 
-                /*
-                Debug.Log("Map:" + map.name);
-                Debug.Log("Map center: " + mapBounds.center);
-                Debug.Log("Map extents: " + mapBounds.extents);
-                Debug.Log("Map max: " + mapBounds.max);
-                Debug.Log("Map min: " + mapBounds.min);
-                Debug.Log("Map size: " + mapBounds.size);
-                */
-                BoundsList.Add(mapBounds);
 
-        }
+                //Instantiate a copy of each map tile.
+                foreach (Object map in Maps)
+                {
+                    Instantiate(map, MapParent.transform, false);
+                }
 
-            Vector3 boundsMax = FindBoundsMax(BoundsList);
-            Vector3 boundsMin = FindBoundsMin(BoundsList);
-            Vector3 boundsCenter = FindCenter(boundsMax, boundsMin);
+                //Add necessary colliders and calculate the bounds of the full map.
+                foreach (Transform map in MapParent.transform)
+                {
+                    map.GetChild(0).gameObject.AddComponent<MeshCollider>();
+                    map.GetChild(0).gameObject.AddComponent<TeleportAreaInvisible>();
+                    map.GetChild(0).gameObject.GetComponent<TeleportAreaInvisible>().markerActive = false;
 
-            Debug.Log("Max: " + boundsMax);
-            Debug.Log("Min: " + boundsMin);
-            Debug.Log("Center: " + boundsCenter);
+                    //Mesh mapMesh = map.transform.GetChild(0).gameObject.GetComponent<MeshFilter>().mesh;
+                    //Bounds mapBounds = mapMesh.bounds;
+                    Bounds mapBounds = map.transform.GetChild(0).gameObject.GetComponent<Collider>().bounds;
 
-            //Move the map to be where the player is looking and below the player.
-            
-            //Center
-            MapParent.transform.localPosition = Player.transform.position - boundsCenter;
+                    /*
+                    Debug.Log("Map:" + map.name);
+                    Debug.Log("Map center: " + mapBounds.center);
+                    Debug.Log("Map extents: " + mapBounds.extents);
+                    Debug.Log("Map max: " + mapBounds.max);
+                    Debug.Log("Map min: " + mapBounds.min);
+                    Debug.Log("Map size: " + mapBounds.size);
+                    */
+                    BoundsList.Add(mapBounds);
+
+                }
+
+                Vector3 boundsMax = FindBoundsMax(BoundsList);
+                Vector3 boundsMin = FindBoundsMin(BoundsList);
+                Vector3 boundsCenter = FindCenter(boundsMax, boundsMin);
+
+                Debug.Log("Max: " + boundsMax);
+                Debug.Log("Min: " + boundsMin);
+                Debug.Log("Center: " + boundsCenter);
+
+                //Move the map to be where the player is looking and below the player.
+
+                //Center
+                MapParent.transform.localPosition = Player.transform.position - boundsCenter;
+            }
 
             //Get camera direction
             Vector3 lookDirection = Player.GetComponent<Player>().hmdTransform.forward;
@@ -111,8 +117,13 @@ public class MapLoader_Tiled : MonoBehaviour
 
 
             //Adjust text display
+            Debug.Log("Folder path: " + FolderPath);
             TextDisplay.transform.Find("Canvas").Find("Map Name").gameObject.GetComponent<Text>().text = FolderPath;
-            TextDisplay.transform.Find("Canvas").Find("Count").gameObject.GetComponent<Text>().text = Maps.Length.ToString();
+            if (Maps.Length >= 1)
+                TextDisplay.transform.Find("Canvas").Find("Count").gameObject.GetComponent<Text>().text = Maps.Length.ToString();
+            else
+                TextDisplay.transform.Find("Canvas").Find("Count").gameObject.GetComponent<Text>().text = "<b>No maps found! Please check path name.</b>";
+
 
 
         }

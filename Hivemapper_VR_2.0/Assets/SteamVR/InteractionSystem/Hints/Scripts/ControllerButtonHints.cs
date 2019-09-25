@@ -32,6 +32,8 @@ namespace Valve.VR.InteractionSystem
 		private float startTime;
 		private float tickCount;
 
+        public float tooltipSizeMultiplier = 0.75f;
+
 		private enum OffsetType
 		{
 			Up,
@@ -381,7 +383,9 @@ namespace Valve.VR.InteractionSystem
 
 			centerPosition += hintInfo.textStartAnchor.position;
 
-			// Scale hint components to match player size
+            // Scale hint components to match player size
+            //adjustment: make text canvas smaller
+            hintInfo.textCanvas.transform.localScale *= tooltipSizeMultiplier;
 			hintInfo.textCanvas.transform.localScale = Vector3.Scale( hintInfo.textCanvas.transform.localScale, player.transform.localScale );
 			hintInfo.textStartAnchor.transform.localScale = Vector3.Scale( hintInfo.textStartAnchor.transform.localScale, player.transform.localScale );
 			hintInfo.textEndAnchor.transform.localScale = Vector3.Scale( hintInfo.textEndAnchor.transform.localScale, player.transform.localScale );
@@ -588,7 +592,8 @@ namespace Valve.VR.InteractionSystem
 				if ( ticks - tickCount > 1.0f )
 				{
 					tickCount += 1.0f;
-                    hapticFlash.Execute(0, 0.005f, 0.005f, 1, inputSource);
+                    //adjustment
+                    //hapticFlash.Execute(0, 0.005f, 0.005f, 1, inputSource);
 				}
 
 				for ( int i = 0; i < flashingRenderers.Count; i++ )

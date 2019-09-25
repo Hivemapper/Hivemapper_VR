@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.hivemapper_vr_2.0.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\dylan\\Documents\\GitHub\\Hivemapper_VR\\Hivemapper_VR_2.0\\actions.json",
+      "action_manifest_path": "C:\\Users\\vr\\Documents\\GitHub\\Hivemapper_VR\\Hivemapper_VR_2.0\\actions.json",
       "strings": {
         "en_us": {
           "name": "Hivemapper_VR_2.0 [Testing]"
