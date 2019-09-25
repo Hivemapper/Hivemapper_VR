@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Map Viewer.unity
+- path: Assets/Scenes/Map Viewer_Tiled.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

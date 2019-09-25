@@ -448,11 +448,13 @@ namespace Valve.VR.InteractionSystem
 			for ( int i = 0; i < renderers.Count; i++ )
 			{
 				Texture mainTexture = renderers[i].material.mainTexture;
-				renderers[i].sharedMaterial = controllerMaterial;
+                //adjustment
+				//renderers[i].sharedMaterial = controllerMaterial;
 				renderers[i].material.mainTexture = mainTexture;
 
 				// This is to poke unity into setting the correct render queue for the model
-				renderers[i].material.renderQueue = controllerMaterial.shader.renderQueue;
+			//adjustment	
+            //renderers[i].material.renderQueue = controllerMaterial.shader.renderQueue;
 			}
 
 			for ( int i = 0; i < actions.Length; i++ )

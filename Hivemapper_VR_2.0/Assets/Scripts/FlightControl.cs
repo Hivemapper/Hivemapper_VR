@@ -7,13 +7,22 @@ public class FlightControl : MonoBehaviour
     //Controls the Flight script on LeftHand and RightHand in Player.
 
     [Tooltip("Set flight speed.")]
-    public float flightSpeed = 1f;
+    public float flightSpeed = 50f;
+
+    [Tooltip("How slow sideways flight should be compared to forward flight.")]
+    public float sidewaysSlowdown = 0.25f;
 
     [Tooltip("Enable rotation.")]
     public bool rotationEnabled = true;
 
-    [Tooltip("Rotation speed.")]
-    public float rotateSpeed = 50f;
+    [Tooltip("Number of degrees to rotate for each control stick input.")]
+    public float rotateSpeed = 30f;
+
+    [Tooltip("If true, you fly in the direction of your gaze. If false, you fly in the direction of your controller.")]
+    public bool flyByGaze = true;
+
+    [Tooltip("Show tooltips.")]
+    public bool showTooltips = true;
 
     // Start is called before the first frame update
     void Start()
