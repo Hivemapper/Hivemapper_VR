@@ -11,7 +11,7 @@
 /Hivemapper_VR_2.0/[Mm]emoryCaptures/
 
 #Large map files in Resources
-/Hivemapper_VR_2.0/Assets/Resources
+#/Hivemapper_VR_2.0/Assets/Resources
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta

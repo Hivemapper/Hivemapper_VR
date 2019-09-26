@@ -15,10 +15,8 @@ namespace Valve.VR.InteractionSystem
 
         public GameObject flightController;
 
-        [Tooltip("How far the control stick or touchpad needs to be pressed to trigger flight.")]
-        public float stickThreshold = 0.5f;
+        private float stickThreshold;
 
-        [Tooltip("Show tooltips.")]
         private bool showTooltips;
 
         public GameObject rotationIndicator;
@@ -35,6 +33,7 @@ namespace Valve.VR.InteractionSystem
 
         private bool justRotated = false;
         private Coroutine hintCoroutine = null;
+
 
 
         // Start is called before the first frame update
@@ -103,6 +102,9 @@ namespace Valve.VR.InteractionSystem
             //Set rotation information according to Flight Control.
             rotationEnabled = flightController.GetComponent<FlightControl>().rotationEnabled;
             rotationSpeed = flightController.GetComponent<FlightControl>().rotateSpeed;
+
+            //Set stick sensitivity according to Flight Control.
+            stickThreshold = flightController.GetComponent<FlightControl>().stickThreshold;
 
             //Show relevant indicator.
             if (rotationEnabled && !rotationIndicator.activeSelf)

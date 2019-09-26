@@ -14,11 +14,6 @@ public class MapLoader_Tiled : MonoBehaviour
 
     public GameObject Player;
 
-    [Tooltip("The folder full of tiled maps to be loaded. Maps must be in Resources. " +
-        "\n\nIf your maps are in Assets>Resources>Sample Data>Maps>tiled_meshes/0, " +
-        "this string should be 'Sample Data/Maps/tiled_meshes/0'.")]
-    public string FolderPath;
-
     [Tooltip("The parent object for loaded maps.")]
     public GameObject MapParent;
 
@@ -26,9 +21,14 @@ public class MapLoader_Tiled : MonoBehaviour
     public GameObject TextDisplay;
 
     [Tooltip("The height the user should start above the map.")]
-    public float startingHeight = 5f;
+    public float startingHeight = 200f;
 
-    private Object[] Maps;
+        [Tooltip("The folder full of tiled maps to be loaded. Maps must be in Resources. " +
+    "\n\nIf your maps are in Assets>Resources>Sample Data>Maps>tiled_meshes/0, " +
+    "this string should be 'Sample Data/Maps/tiled_meshes/0'.")]
+        public string FolderPath;
+
+        private Object[] Maps;
 
         List<Bounds> BoundsList = new List<Bounds>();
 
@@ -90,9 +90,9 @@ public class MapLoader_Tiled : MonoBehaviour
                 Vector3 boundsMin = FindBoundsMin(BoundsList);
                 Vector3 boundsCenter = FindCenter(boundsMax, boundsMin);
 
-                Debug.Log("Max: " + boundsMax);
-                Debug.Log("Min: " + boundsMin);
-                Debug.Log("Center: " + boundsCenter);
+                //Debug.Log("Max: " + boundsMax);
+                //Debug.Log("Min: " + boundsMin);
+                //Debug.Log("Center: " + boundsCenter);
 
                 //Move the map to be where the player is looking and below the player.
 
@@ -104,7 +104,7 @@ public class MapLoader_Tiled : MonoBehaviour
             Vector3 lookDirection = Player.GetComponent<Player>().hmdTransform.forward;
             lookDirection.y = 0; //Don't want to move it up or down
             lookDirection = Vector3.Normalize(lookDirection); //Want to keep the magnitude 1, but without y component
-            Debug.Log("Look direction: " + lookDirection);
+            Debug.Log("Initial gaze direction, used for loading: " + lookDirection);
 
             //Move map in direction of camera direction and down
             MapParent.transform.position += lookDirection * startingHeight * 2;

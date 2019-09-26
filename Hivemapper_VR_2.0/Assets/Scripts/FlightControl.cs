@@ -6,6 +6,9 @@ public class FlightControl : MonoBehaviour
 {
     //Controls the Flight script on LeftHand and RightHand in Player.
 
+    [Tooltip("How far the control stick or touchpad needs to be pressed to trigger flight.")]
+    public float stickThreshold = 0.5f;
+
     [Tooltip("Set flight speed.")]
     public float flightSpeed = 50f;
 
@@ -23,6 +26,8 @@ public class FlightControl : MonoBehaviour
 
     [Tooltip("Show tooltips.")]
     public bool showTooltips = true;
+
+
 
     // Start is called before the first frame update
     void Start()
