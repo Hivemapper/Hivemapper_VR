@@ -1,9 +1,10 @@
-# Hivemapper_VR
+# Hivemapper VR
 ## Exploring Hivemapper Maps in Virtual Reality
 
-This is an application designed to facilitate the review of Hivemapper maps, including change detections, in virtual reality.
+This is an application designed to facilitate interacting with Hivemapper maps, including change detections, in virtual reality.
 
-Please see this document for details on use.
-<https://docs.google.com/document/d/1WYsC1gX_j6Aj-bDvTVI560NBkDJqdCFNsvU8RNOmaN4/edit?usp=sharing>
+ This doc will explain how to setup and operate Hivemapper VR on your own PC:
+ https://medium.com/@Hivemapper/how-43652f11d8ea
 
-For further questions, email Dylan Fox at <dylan@drfoxdesign.com>.
+
+For further questions, email us at <hi@hivemapper.com>.
